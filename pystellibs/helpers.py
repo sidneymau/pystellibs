@@ -3,7 +3,7 @@ This is a first collection of tools making the design easier
 """
 import sys
 from functools import partial, wraps, update_wrapper
-from inspect import getargspec, ismethod
+from inspect import getfullargspec, ismethod
 import warnings
 import numpy as np
 import itertools
@@ -286,7 +286,7 @@ def keywords_first(f):
     @wraps(f)
     def wrapper(*a, **k):
         a = list(a)
-        for idx, arg in enumerate(getargspec(f).args, -ismethod(f)):
+        for idx, arg in enumerate(getfullargspec(f).args, -ismethod(f)):
             if arg in k:
                 if idx < len(a):
                     a.insert(idx, k.pop(arg))

@@ -263,7 +263,7 @@ def allkeywords(f):
     @_fntools.wraps(f)
     def wrapper(*a, **k):
         a = list(a)
-        for idx, arg in enumerate(_inspect.getargspec(f).args, -_inspect.ismethod(f)):  # or [0] in 2.5
+        for idx, arg in enumerate(_inspect.getfullargspec(f).args, -_inspect.ismethod(f)):  # or [0] in 2.5
             if arg in k:
                 if idx < len(a):
                     a.insert(idx, k.pop(arg))
